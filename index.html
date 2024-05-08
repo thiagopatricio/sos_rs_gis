@@ -18,7 +18,7 @@
             margin: 0;
         }
         </style>
-        <title></title>
+        <title> Postes Afetados Porto Alegre</title>
     </head>
     <body>
         <div id="map">
@@ -58,7 +58,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:18, minZoom:1
-        }).fitBounds([[-30.302194339741213,-51.42150215466039],[-29.956219389927938,-50.74496383347076]]);
+        })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -77,6 +77,10 @@
         .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+            map.setMaxBounds(map.getBounds());
         }
         map.createPane('pane_OpenStreetMap_0');
         map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
@@ -277,7 +281,6 @@
             style: style_FiosAltaTenso_2_0,
         });
         bounds_group.addLayer(layer_FiosAltaTenso_2);
-        map.addLayer(layer_FiosAltaTenso_2);
         function pop_FiosMediaTenso_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -390,7 +393,6 @@
             style: style_FiosMediaTenso_3_0,
         });
         bounds_group.addLayer(layer_FiosMediaTenso_3);
-        map.addLayer(layer_FiosMediaTenso_3);
         function pop_FiosBaixaTenso_4(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -506,7 +508,6 @@
             style: style_FiosBaixaTenso_4_0,
         });
         bounds_group.addLayer(layer_FiosBaixaTenso_4);
-        map.addLayer(layer_FiosBaixaTenso_4);
         function pop_Postes_5(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -634,7 +635,6 @@
             },
         });
         bounds_group.addLayer(layer_Postes_5);
-        map.addLayer(layer_Postes_5);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
