@@ -8,8 +8,6 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/MarkerCluster.css">
-        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
@@ -37,7 +35,6 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="js/leaflet.markercluster.js"></script>
         <script src="data/CheiasemPortoAlegreInundaocomnvel550cm55m_1.js"></script>
         <script src="data/FiosAltaTenso_2.js"></script>
         <script src="data/FiosMediaTenso_3.js"></script>
@@ -157,7 +154,7 @@
                 lineJoin: 'bevel',
                 weight: 1.0,
                 fillOpacity: 0,
-                interactive: true,
+                interactive: false,
             }
         }
         map.createPane('pane_CheiasemPortoAlegreInundaocomnvel550cm55m_1');
@@ -165,7 +162,7 @@
         map.getPane('pane_CheiasemPortoAlegreInundaocomnvel550cm55m_1').style['mix-blend-mode'] = 'normal';
         var layer_CheiasemPortoAlegreInundaocomnvel550cm55m_1 = new L.geoJson(json_CheiasemPortoAlegreInundaocomnvel550cm55m_1, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_CheiasemPortoAlegreInundaocomnvel550cm55m_1',
             layerName: 'layer_CheiasemPortoAlegreInundaocomnvel550cm55m_1',
             pane: 'pane_CheiasemPortoAlegreInundaocomnvel550cm55m_1',
@@ -264,7 +261,7 @@
                 lineJoin: 'bevel',
                 weight: 8.0,
                 fillOpacity: 0,
-                interactive: true,
+                interactive: false,
             }
         }
         map.createPane('pane_FiosAltaTenso_2');
@@ -272,7 +269,7 @@
         map.getPane('pane_FiosAltaTenso_2').style['mix-blend-mode'] = 'normal';
         var layer_FiosAltaTenso_2 = new L.geoJson(json_FiosAltaTenso_2, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_FiosAltaTenso_2',
             layerName: 'layer_FiosAltaTenso_2',
             pane: 'pane_FiosAltaTenso_2',
@@ -377,7 +374,7 @@
                 lineJoin: 'bevel',
                 weight: 7.0,
                 fillOpacity: 0,
-                interactive: true,
+                interactive: false,
             }
         }
         map.createPane('pane_FiosMediaTenso_3');
@@ -385,7 +382,7 @@
         map.getPane('pane_FiosMediaTenso_3').style['mix-blend-mode'] = 'normal';
         var layer_FiosMediaTenso_3 = new L.geoJson(json_FiosMediaTenso_3, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_FiosMediaTenso_3',
             layerName: 'layer_FiosMediaTenso_3',
             pane: 'pane_FiosMediaTenso_3',
@@ -493,7 +490,7 @@
                 lineJoin: 'bevel',
                 weight: 6.0,
                 fillOpacity: 0,
-                interactive: true,
+                interactive: false,
             }
         }
         map.createPane('pane_FiosBaixaTenso_4');
@@ -501,7 +498,7 @@
         map.getPane('pane_FiosBaixaTenso_4').style['mix-blend-mode'] = 'normal';
         var layer_FiosBaixaTenso_4 = new L.geoJson(json_FiosBaixaTenso_4, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_FiosBaixaTenso_4',
             layerName: 'layer_FiosBaixaTenso_4',
             pane: 'pane_FiosBaixaTenso_4',
@@ -615,7 +612,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(196,180,37,1.0)',
-                interactive: true,
+                interactive: false,
             }
         }
         map.createPane('pane_Postes_5');
@@ -623,7 +620,7 @@
         map.getPane('pane_Postes_5').style['mix-blend-mode'] = 'normal';
         var layer_Postes_5 = new L.geoJson(json_Postes_5, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_Postes_5',
             layerName: 'layer_Postes_5',
             pane: 'pane_Postes_5',
@@ -636,12 +633,8 @@
                 return L.shapeMarker(latlng, style_Postes_5_0(feature));
             },
         });
-        var cluster_Postes_5 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-            spiderfyDistanceMultiplier: 2});
-        cluster_Postes_5.addLayer(layer_Postes_5);
-
         bounds_group.addLayer(layer_Postes_5);
-        cluster_Postes_5.addTo(map);
+        map.addLayer(layer_Postes_5);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -653,7 +646,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Postes_5.png" /> Postes': cluster_Postes_5,'<img src="legend/FiosBaixaTenso_4.png" /> Fios Baixa Tensão': layer_FiosBaixaTenso_4,'<img src="legend/FiosMediaTenso_3.png" /> Fios Media Tensão': layer_FiosMediaTenso_3,'<img src="legend/FiosAltaTenso_2.png" /> Fios Alta Tensão': layer_FiosAltaTenso_2,'<img src="legend/CheiasemPortoAlegreInundaocomnvel550cm55m_1.png" /> Cheias em Porto Alegre — Inundação com nível 550 cm (5.5m)': layer_CheiasemPortoAlegreInundaocomnvel550cm55m_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/Postes_5.png" /> Postes': layer_Postes_5,'<img src="legend/FiosBaixaTenso_4.png" /> Fios Baixa Tensão': layer_FiosBaixaTenso_4,'<img src="legend/FiosMediaTenso_3.png" /> Fios Media Tensão': layer_FiosMediaTenso_3,'<img src="legend/FiosAltaTenso_2.png" /> Fios Alta Tensão': layer_FiosAltaTenso_2,'<img src="legend/CheiasemPortoAlegreInundaocomnvel550cm55m_1.png" /> Cheias em Porto Alegre — Inundação com nível 550 cm (5.5m)': layer_CheiasemPortoAlegreInundaocomnvel550cm55m_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
         setBounds();
         </script>
     </body>
